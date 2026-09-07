@@ -152,6 +152,6 @@ res.status(500).send({Status :"Success" , Message :"Internal Server Error"})
         
     }
 })
-app.listen(PORT ,()=>{
-    console.log(`app is running is ${PORT}`)
+app.listen(5000 ,()=>{
+    console.log(`app is running is 5000`)
 })
