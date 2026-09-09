@@ -17,7 +17,7 @@ function App() {
 
   )
 
-  const API_URL ="http://localhost:5000";
+  const API_URL ="";
   const handleChange = (e) => {
     setFormdata({
       ...formData,
