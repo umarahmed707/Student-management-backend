@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import db from './db.js';
+import path from "path"
 
 
 const app = express();
@@ -21,18 +22,18 @@ next()
 
 app.use(logger)
 
-app.get("/" ,(req,res)=>{
-    // db.query(`CREATE TABLE Student(
-    //     Firstname VARCHAR(255),
-    //     Lastname VARCHAR(255),
-    //     course VARCHAR(255),
-    //     batch VARCHAR(255),
-    //     Rollnumber VARCHAR(255),
-    //     age int,
+// app.get("/" ,(req,res)=>{
+//     // db.query(`CREATE TABLE Student(
+//     //     Firstname VARCHAR(255),
+//     //     Lastname VARCHAR(255),
+//     //     course VARCHAR(255),
+//     //     batch VARCHAR(255),
+//     //     Rollnumber VARCHAR(255),
+//     //     age int,
         
-    //     )`)
-    res.send("Hello World")
-})
+//     //     )`)
+//     res.send("Hello World")
+// })
 
 app.post("/student" , async(req,res)=>{
     const reqbody = req.body;
@@ -44,7 +45,7 @@ app.post("/student" , async(req,res)=>{
 
     try {
         const dbres = await db.query(
-            `INSERT INTO Student (Firstname, Lastname, course,batch ,Rollnumber , age)
+            `INSERT INTO students (Firstname, Lastname, course,batch ,Rollnumber , age)
 VALUES($1,$2,$3,$4,$5,$6)
 RETURNING*`,
 [ reqbody.Firstname, reqbody.Lastname,reqbody.course , reqbody.batch , reqbody.Rollnumber , reqbody.age])
@@ -59,7 +60,7 @@ RETURNING*`,
 
 app.get('/student' ,async (req,res)=>{
     try {
-          const students = await db.query(`SELECT * from Student`);
+          const students = await db.query(`SELECT * from students`);
     res.status(200).send({status :"Success" ,message :students.rows})
     } catch (error) {
         console.log(error)
@@ -73,7 +74,7 @@ app.get('/student/:id' , async(req ,res)=>{
 
     try {
         const dbres = await db.query(
-            `SELECT * FROM Student WHERE id = $1`,
+            `SELECT * FROM students WHERE id = $1`,
             [studentid]
 
         );
@@ -99,7 +100,7 @@ app.put('/student/:id' , async(req,res)=>{
     }
 try {
     const dbres = await db.query(
-        `UPDATE Student SET
+        `UPDATE students SET
         Firstname = $1,
         Lastname = $2,
         course = $3,
@@ -122,7 +123,7 @@ studentid
         return res.status(404).send({Status:"Error" , Message :"Student Not Found"})
     }
 
-    res.status(201).send({Status:"Success" , Message : dbres.rows})
+    res.status(200).send({Status:"Success" , Message : dbres.rows})
 } catch (error) {
     console.log("error" ,error)
     res.status(500).send({Status :"Error" , Message :"internal Server Error"})
@@ -136,7 +137,7 @@ app.delete('/student/:id' , async(req,res)=>{
 
     try {
         const dbres = await db.query(
-            `DELETE FROM Student
+            `DELETE FROM students
             WHERE id =$1
             RETURNING *`,
             [studentid]
@@ -151,7 +152,14 @@ res.status(500).send({Status :"Success" , Message :"Internal Server Error"})
 
         
     }
-})
+});
+
+const __dirname = path.resolve();//D:\shariq\saylani-batch-18\react-with-server\ecom-without-db
+const __frontend = path.join(__dirname, '../express-project/build')//D:\shariq\saylani-batch-18\react-with-server\ecom-without-db\web\build
+app.use('/', express.static(__frontend))
+app.use("/*splat", express.static(__frontend))
+
+
 app.listen(5000 ,()=>{
     console.log(`app is running is 5000`)
 })
