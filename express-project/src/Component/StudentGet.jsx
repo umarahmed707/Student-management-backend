@@ -223,7 +223,7 @@ sethandlemodel(true)
 
                                     <td className="px-6 py-4">
                                         <span className="font-mono text-sm font-medium text-slate-700">
-                                            {student.rollnumber}
+                                            {student.Rollnumber}
                                         </span>
                                     </td>
 
@@ -358,7 +358,7 @@ sethandlemodel(true)
                 <input
                     type="text"
                     name="rollnumber"
-                    value={formData.rollnumber}
+                    value={formData.Rollnumber}
                     onChange={handleChange}
                     placeholder="e.g. CADO-001"
                     className="w-full rounded-xl border border-slate-300 px-4 py-2 outline-none"
