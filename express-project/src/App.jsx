@@ -17,7 +17,6 @@ function App() {
 
   )
 
-  const API_URL ="";
   const handleChange = (e) => {
     setFormdata({
       ...formData,
@@ -27,7 +26,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/student`, formData)
+      const response = await axios.post(`/student`, formData)
       console.log(response.data)
       alert("Student Add Successfully")
       setRefresh((prev)=>prev + 1)

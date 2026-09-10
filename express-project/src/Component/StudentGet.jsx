@@ -26,7 +26,7 @@ const StudentGet = ({refresh}) => {
 
     const getstudent = async () => {
         try {
-            const response = await axios.get(`${API_URL}/student`);
+            const response = await axios.get(`/student`);
 
             console.log(response.data);
 
@@ -42,7 +42,7 @@ const StudentGet = ({refresh}) => {
 console.log(id)
 console.log(formData)
 
-            const response = await axios.put(`${API_URL}/student/${id}`,formData)
+            const response = await axios.put(`/student/${id}`,formData)
             console.log(response.data)
 sethandlemodel(false)
 getstudent()
@@ -85,7 +85,7 @@ sethandlemodel(true)
     const deletestudent = async(id)=>{
         // setSelectedID(student.id)
         try {
-            const response = await axios.delete(`${API_URL}/student/${id}`)
+            const response = await axios.delete(`/student/${id}`)
 
             setStudentget((prevstudent)=> 
             prevstudent.filter((student)=> student.id !== id)
