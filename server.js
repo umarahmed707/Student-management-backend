@@ -154,8 +154,8 @@ res.status(500).send({Status :"Success" , Message :"Internal Server Error"})
     }
 });
 
-const __dirname = path.resolve();//D:\shariq\saylani-batch-18\react-with-server\ecom-without-db
-const __frontend = path.join(__dirname, './express-project/build')//D:\shariq\saylani-batch-18\react-with-server\ecom-without-db\web\build
+const __dirname = path.resolve();
+const __frontend = path.join(__dirname, './express-project/build')
 app.use('/', express.static(__frontend))
 app.use("/*splat", express.static(__frontend))
 
