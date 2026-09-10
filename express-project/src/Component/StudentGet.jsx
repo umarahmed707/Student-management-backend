@@ -54,7 +54,7 @@ setStudentget((prevstudent)=>
             Lastname: student.lastname,
             course: student.course,
             batch: student.batch,
-            rollnumber: student.rollnumber,
+            Rollnumber: student.rollnumber,
             age: student.age,
         } : student
     )
@@ -75,7 +75,7 @@ setFormdata({
     Lastname :student.lastname,
     course :student.course,
     batch :student.batch,
-    rollnumber :student.rollnumber,
+    Rollnumber :student.rollnumber,
     age :student.age,
 })
 
@@ -222,8 +222,9 @@ sethandlemodel(true)
                                     </td>
 
                                     <td className="px-6 py-4">
-                                        <span className="font-mono text-sm font-medium text-slate-700">
-                                            {student.Rollnumber}
+                                        <span className="font-mono text-sm 
+                                        font-medium text-slate-700">
+                                            {student.rollnumber}
                                         </span>
                                     </td>
 
@@ -358,7 +359,7 @@ sethandlemodel(true)
                 <input
                     type="text"
                     name="rollnumber"
-                    value={formData.Rollnumber}
+                    value={formData.rollnumber}
                     onChange={handleChange}
                     placeholder="e.g. CADO-001"
                     className="w-full rounded-xl border border-slate-300 px-4 py-2 outline-none"
