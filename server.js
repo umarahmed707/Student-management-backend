@@ -154,12 +154,20 @@ res.status(500).send({Status :"Success" , Message :"Internal Server Error"})
     }
 });
 
+// const __dirname = path.resolve();
+// const __frontend = path.join(__dirname, './express-project/build')
+// app.use('/', express.static(__frontend))
+// app.use("/*splat", express.static(__frontend))
+
 const __dirname = path.resolve();
-const __frontend = path.join(__dirname, './express-project/build')
-app.use('/', express.static(__frontend))
-app.use("/*splat", express.static(__frontend))
 
+const frontendPath = path.join(__dirname, './express-project/build');
 
+app.use(express.static(frontendPath));
+
+app.get('(.*)', (req, res) => {
+    res.sendFile(path.join(frontendPath, 'index.html'));
+});
 app.listen(5000 ,()=>{
     console.log(`app is running is 5000`)
 })
